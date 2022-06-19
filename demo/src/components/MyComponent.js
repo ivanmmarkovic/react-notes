@@ -1,37 +1,37 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 
+
+const reducer = (state, action) => {
+    switch(action.type){
+        case 'INCREMENT':
+            return {counter: state.counter + 1, visible: state.visible};
+        case 'TOGGLE_VISIBILITY':
+            return {visible: !state.visible, counter: state.counter};
+    }
+};
 
 function MyComponent(){
 
-    const [counter, setCounter] = useState(0);
-    const [visible, setVisible] = useState(false);
-    const [message, setMessage] = useState('');
+    const [state, dispatch] = useReducer(reducer, {counter: 0, visible: true});
+
 
     const handleIncrement = () => {
-        setCounter(counter + 1);
-    };
-    const handleDecrement = () => {
-        setCounter(counter - 1);
+        dispatch({type: 'INCREMENT'});
     };
     const handleVisibility = () => {
-        setVisible(!visible);
-    };
-    const handleInputChange = (event) => {
-        setMessage(event.target.value);
+        dispatch({type: 'TOGGLE_VISIBILITY'});
     };
 
     return <div>
         <h1>MyComponent</h1>
-        <p>Count is { counter } </p>
+
+        <p>Count is { state.counter } </p>
         <button onClick={handleIncrement}>Increment</button>
-        <button onClick={handleDecrement}>Decrement</button>
-        <div>
-            <input type="text" onChange={handleInputChange} value={message} />
-            <br />
-            <p>Message is {message}</p>
-        </div>
+
+        <br /><br />
+
         <button onClick={handleVisibility}>Handle visibility</button>
-        {visible && <p>Visible</p>}
+        { state.visible && <p>Visible</p>}
     </div>
 
 }
