@@ -7,6 +7,8 @@ const reducer = (state, action) => {
             return {counter: state.counter + 1, visible: state.visible};
         case 'TOGGLE_VISIBILITY':
             return {visible: !state.visible, counter: state.counter};
+        default:
+            return state;
     }
 };
 
