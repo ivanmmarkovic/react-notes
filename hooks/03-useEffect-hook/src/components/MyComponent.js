@@ -1,15 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 
-const reducer = (state, action) => {
-    switch(action.type){
-        case 'INCREMENT':
-            return {counter: state.counter + 1, visible: state.visible};
-        case 'TOGGLE_VISIBILITY':
-            return {visible: !state.visible, counter: state.counter};
-    }
-};
-
 function MyComponent(){
 
     const [counter, setCounter] = useState(0);
