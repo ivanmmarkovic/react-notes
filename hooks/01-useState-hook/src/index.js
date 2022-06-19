@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from '../../02.useReducer hook/node_modules/@types/react-dom/client';
+import ReactDOM from 'react-dom/client';
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

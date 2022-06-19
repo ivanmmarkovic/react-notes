@@ -1,24 +1,27 @@
-import { useState, useRef } from "react";
+import React, {useEffect, useLayoutEffect, useRef} from "react";
 
-function MyComponent(){
+const MyComponent = () => {
 
-    const [message, setMessage] = useState('');
-    const inputRef = useRef(null);
+    const inputRef = useRef();
+    /*
 
-    const handleClick = () => {
-        setMessage(inputRef.current.value);
-        inputRef.current.value = '';
-        inputRef.current.focus();
-    };
+    useLayoutEffect is called before the stuff is printed to the user
 
-    return <div>
-        <h1>MyComponent</h1>
-        <p>Message : {message}</p>
+    useEffect is called after everything is rendered
 
-        <input type="text" ref={inputRef} /> 
-        <button onClick={handleClick}>Set message</button>
-    </div>
+    */
+    
+    useLayoutEffect(() => {
+        console.log(inputRef.current.value);
+    }, []);
 
-}
+    useEffect(() => {
+        inputRef.current.value = 'Mario';
+    }, []);
+
+    return (<div>
+        <input type="text" value="John" ref={inputRef} />
+    </div>);
+};
 
 export default MyComponent;
