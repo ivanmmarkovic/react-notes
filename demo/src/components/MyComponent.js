@@ -1,5 +1,5 @@
-import { useReducer, useState } from "react";
-
+import { useEffect, useState } from "react";
+import axios from 'axios';
 
 const reducer = (state, action) => {
     switch(action.type){
@@ -12,26 +12,29 @@ const reducer = (state, action) => {
 
 function MyComponent(){
 
-    const [state, dispatch] = useReducer(reducer, {counter: 0, visible: true});
+    const [counter, setCounter] = useState(0);
+    const [email, setEmail] = useState('');
 
+    useEffect(() => {
+        axios.get('https://jsonplaceholder.typicode.com/comments')
+            .then(response => {
+                setEmail(response.data[0].email);
+                console.log('API WAS CALLED');
+            });
+    }, []);
 
     const handleIncrement = () => {
-        dispatch({type: 'INCREMENT'});
-    };
-    const handleVisibility = () => {
-        dispatch({type: 'TOGGLE_VISIBILITY'});
+        setCounter(counter + 1);
     };
 
     return <div>
         <h1>MyComponent</h1>
 
-        <p>Count is { state.counter } </p>
+        <p>Count is { counter } </p>
         <button onClick={handleIncrement}>Increment</button>
 
         <br /><br />
-
-        <button onClick={handleVisibility}>Handle visibility</button>
-        { state.visible && <p>Visible</p>}
+        <p>Email is : {email}</p>
     </div>
 
 }
