@@ -1,40 +1,22 @@
-import { useEffect, useState } from "../../../hooks/03-useEffect-hook/node_modules/@types/react";
-import axios from '../../../hooks/03-useEffect-hook/node_modules/axios';
-
-const reducer = (state, action) => {
-    switch(action.type){
-        case 'INCREMENT':
-            return {counter: state.counter + 1, visible: state.visible};
-        case 'TOGGLE_VISIBILITY':
-            return {visible: !state.visible, counter: state.counter};
-    }
-};
+import { useState, useRef } from "react";
 
 function MyComponent(){
 
-    const [counter, setCounter] = useState(0);
-    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const inputRef = useRef(null);
 
-    useEffect(() => {
-        axios.get('https://jsonplaceholder.typicode.com/comments')
-            .then(response => {
-                setEmail(response.data[0].email);
-                console.log('API WAS CALLED');
-            });
-    }, []);
-
-    const handleIncrement = () => {
-        setCounter(counter + 1);
+    const handleClick = () => {
+        setMessage(inputRef.current.value);
+        inputRef.current.value = '';
+        inputRef.current.focus();
     };
 
     return <div>
         <h1>MyComponent</h1>
+        <p>Message : {message}</p>
 
-        <p>Count is { counter } </p>
-        <button onClick={handleIncrement}>Increment</button>
-
-        <br /><br />
-        <p>Email is : {email}</p>
+        <input type="text" ref={inputRef} /> 
+        <button onClick={handleClick}>Set message</button>
     </div>
 
 }
