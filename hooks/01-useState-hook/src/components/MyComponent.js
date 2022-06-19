@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from "../../../03-useEffect-hook/node_modules/@types/react";
 
 
 function MyComponent(){

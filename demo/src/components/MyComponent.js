@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import axios from 'axios';
+import { useEffect, useState } from "../../../hooks/03-useEffect-hook/node_modules/@types/react";
+import axios from '../../../hooks/03-useEffect-hook/node_modules/axios';
 
 const reducer = (state, action) => {
     switch(action.type){
