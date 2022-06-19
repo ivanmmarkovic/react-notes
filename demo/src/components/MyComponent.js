@@ -1,43 +1,23 @@
-import React, {useRef, useState, useEffect, useMemo} from "react";
-import axios from 'axios';
-
+import React, {useState} from "react";
 
 const MyComponent = () => {
 
-    const [data, setData] = useState(null);
-    const [toggle, setToggle] = useState(false);
+    const [counter, setCounter] = useState(0);
+    
 
-    useEffect(() => {
-        axios
-            .get('https://jsonplaceholder.typicode.com/comments')
-            .then(response => {
-                setData(response.data);
-            });
-    }, []);
-
-    const findLongestName = (comments) => {
-        if(!comments) return null;
-
-        let longestName = '';
-        for(let i = 0; i < comments.length; i++){
-            let currentName = comments[i].name;
-            if(currentName.length > longestName.length){
-                longestName = currentName;
-            }
-        }
-        console.log('THIS WAS COMPUTED');
-        return longestName;
-    }
-
-    const getLongestName = useMemo(() => findLongestName(data), [data]);
+    const handleIncrement = () => {
+        setCounter(counter + 1);
+    };
+    const handleDecrement = () => {
+        setCounter(counter - 1);
+    };
 
     return <div>
 
-        {/* <p>{findLongestName(data)}</p> */}
-        <p>{getLongestName}</p>
-        <button onClick={() => setToggle(!toggle)}>Toggle</button>
-        <br />
-        { toggle && <h1>toggle</h1> }
+        <h1>MyComponent</h1>
+        <button onClick={handleIncrement}>Increment</button>
+        <button onClick={handleDecrement}>Decrement</button>
+        <p>{counter}</p>
 
     </div>
 };
