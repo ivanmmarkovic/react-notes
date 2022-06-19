@@ -5,6 +5,7 @@ function MyComponent(){
 
     const [counter, setCounter] = useState(0);
     const [visible, setVisible] = useState(false);
+    const [message, setMessage] = useState('');
 
     const handleIncrement = () => {
         setCounter(counter + 1);
@@ -15,13 +16,20 @@ function MyComponent(){
     const handleVisibility = () => {
         setVisible(!visible);
     };
+    const handleInputChange = (event) => {
+        setMessage(event.target.value);
+    };
 
     return <div>
         <h1>MyComponent</h1>
         <p>Count is { counter } </p>
         <button onClick={handleIncrement}>Increment</button>
         <button onClick={handleDecrement}>Decrement</button>
-        <br />
+        <div>
+            <input type="text" onChange={handleInputChange} value={message} />
+            <br />
+            <p>Message is {message}</p>
+        </div>
         <button onClick={handleVisibility}>Handle visibility</button>
         {visible && <p>Visible</p>}
     </div>
