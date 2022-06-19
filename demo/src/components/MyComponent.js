@@ -1,26 +1,19 @@
 import React, {useEffect, useLayoutEffect, useRef} from "react";
+import Button from "./Button";
 
 const MyComponent = () => {
 
-    const inputRef = useRef();
-    /*
-
-    useLayoutEffect is called before the stuff is printed to the user
-
-    useEffect is called after everything is rendered
-
-    */
+    const btnRef = useRef(null);
     
-    useLayoutEffect(() => {
-        console.log(inputRef.current.value);
-    }, []);
-
-    useEffect(() => {
-        inputRef.current.value = 'Mario';
-    }, []);
+    const handleClick = () => {
+        btnRef.current.changeVisibility();
+    };
 
     return (<div>
-        <input type="text" value="John" ref={inputRef} />
+
+        <button onClick={handleClick}>Parent button</button>
+
+        <Button ref={btnRef} />
     </div>);
 };
 
