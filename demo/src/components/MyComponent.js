@@ -1,25 +1,23 @@
-import {useState} from "react";
+import {useRef} from "react";
+
+import Button from "./Button";
+
 
 const MyComponent = () => {
 
-    const [counter, setCounter] = useState(0);
-    
+    const btnRef = useRef(null);
 
-    const handleIncrement = () => {
-        setCounter(counter + 1);
-    };
-    const handleDecrement = () => {
-        setCounter(counter - 1);
+    const handleClick = () => {
+        btnRef.current.changeVisibility();
     };
 
     return <div>
 
-        <h1>MyComponent</h1>
-        <button onClick={handleIncrement}>Increment</button>
-        <button onClick={handleDecrement}>Decrement</button>
-        <p>{counter}</p>
+        <button onClick={handleClick}>Parent</button>
+        <Button ref={btnRef} />
 
     </div>
+
 };
 
 export default MyComponent;
