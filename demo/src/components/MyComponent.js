@@ -1,47 +1,24 @@
-import {useEffect, useLayoutEffect, useMemo, useRef, useState} from "react";
-import axios from 'axios';
-
+import { useState, useCallback } from "react";
+import Child from './Child';
 
 const MyComponent = () => {
-
-    const [data, setData] = useState([]);
-    const [visible, setVisible] = useState(false);
     
-    useEffect(() => {
-        axios
-            .get('https://jsonplaceholder.typicode.com/comments')
-            .then(response => {
-                setData(response.data);
-            });
-    }, []);
+    const [data, setData] = useState('This is a message ...');
+    const [toggle, setToggle] = useState(false);
 
-    const handleClick = () => {
-        setVisible(!visible);
-    };
+    const returnComment = useCallback((name) => {
+        return data + ' ' + name;
+    }, [data]);
 
-    const findLongestUsername = (comments) => {
-        if(!comments) return null;
-
-        let longestName = '';
-        for(let i = 0; i < comments.length; i++){
-            let currentName = comments[i].name;
-            if(currentName.length > longestName.length){
-                longestName = currentName;
-            }
-        }
-        console.log('THIS WAS COMPUTED');
-        return longestName;
-    };
-
-    const longestName = useMemo(() => findLongestUsername(data), [data]);
     return <div>
 
-        <p>{longestName}</p>
-        
-        <button onClick={handleClick}>Click</button>
+        <Child returnComment={returnComment} />
+        <button onClick={() => setToggle(!toggle)}>Toggle</button>
+        <br />
+        { toggle && <h1>toggle</h1> }
 
     </div>
-
+    
 };
 
 export default MyComponent;
