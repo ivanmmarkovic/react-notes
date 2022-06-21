@@ -1,20 +1,44 @@
-import {useRef} from "react";
-
-import Button from "./Button";
+import {useEffect, useLayoutEffect, useMemo, useRef, useState} from "react";
+import axios from 'axios';
 
 
 const MyComponent = () => {
 
-    const btnRef = useRef(null);
+    const [data, setData] = useState([]);
+    const [visible, setVisible] = useState(false);
+    
+    useEffect(() => {
+        axios
+            .get('https://jsonplaceholder.typicode.com/comments')
+            .then(response => {
+                setData(response.data);
+            });
+    }, []);
 
     const handleClick = () => {
-        btnRef.current.changeVisibility();
+        setVisible(!visible);
     };
 
+    const findLongestUsername = (comments) => {
+        if(!comments) return null;
+
+        let longestName = '';
+        for(let i = 0; i < comments.length; i++){
+            let currentName = comments[i].name;
+            if(currentName.length > longestName.length){
+                longestName = currentName;
+            }
+        }
+        console.log('THIS WAS COMPUTED');
+        return longestName;
+    };
+
+    const longestName = useMemo(() => findLongestUsername(data), [data]);
     return <div>
 
-        <button onClick={handleClick}>Parent</button>
-        <Button ref={btnRef} />
+        <p>{longestName}</p>
+        
+        <button onClick={handleClick}>Click</button>
 
     </div>
 
