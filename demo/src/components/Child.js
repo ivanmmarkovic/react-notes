@@ -7,7 +7,7 @@ const Child = ({returnComment}) => {
     }, [returnComment]);
 
     return <div>
-        {returnComment('Pedro')}
+        {returnComment()}
     </div>
 }
 

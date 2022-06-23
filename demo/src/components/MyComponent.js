@@ -3,20 +3,18 @@ import Child from './Child';
 
 const MyComponent = () => {
     
-    const [data, setData] = useState('This is a message ...');
-    const [toggle, setToggle] = useState(false);
+    const [visible, setVisible] = useState(false);
+    const [data, setData] = useState('DATA');
 
-    const returnComment = useCallback((name) => {
-        return data + ' ' + name;
+    const returnComment = useCallback(() => {
+        return data;
     }, [data]);
 
     return <div>
-
+        <h1>MyComponent</h1>
         <Child returnComment={returnComment} />
-        <button onClick={() => setToggle(!toggle)}>Toggle</button>
-        <br />
-        { toggle && <h1>toggle</h1> }
-
+        <button onClick={() => setVisible(!visible)}>Click</button>
+        {visible && <p>This is a text</p>}
     </div>
     
 };
