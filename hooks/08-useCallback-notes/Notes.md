@@ -14,6 +14,7 @@ useCallback - store function
 
 useEffect will be called every time when there is a change in 
 returnComment function. 
+When page rerenders returnComment will change because it returns data as part of the state.
 
 ```
 
