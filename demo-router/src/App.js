@@ -1,5 +1,7 @@
 
-import {BrowserRouter, Link, Route} from 'react-router-dom';
+import {BrowserRouter, Link, Routes, Route, Navigate} from 'react-router-dom';
+import About from './pages/About';
+import Home from './pages/Home';
 
 
 function App() {
@@ -12,8 +14,10 @@ function App() {
       <h1>React router app</h1>
 
       <Routes>
-        {/* <Route path='/' element={} />
-        <Route path="/about" element={} /> */}
+        <Route path='/' element={<Home />} />
+        <Route path="/about" element={<About />} />
+
+        <Route path="/redirect" element={ <Navigate to={"/about"} /> } />
       </Routes>
     </BrowserRouter>
   );
