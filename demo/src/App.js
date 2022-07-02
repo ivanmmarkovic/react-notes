@@ -1,9 +1,10 @@
+import MyComponent from "./components/MyComponent";
 
 function App() {
 
   return (
     <div>
-      
+      <MyComponent />
     </div>
   );
 }
