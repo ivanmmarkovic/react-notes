@@ -17,4 +17,4 @@ Mostly this hook is used to get data.
 
 In example shown in image *01.useEffect.png*, whenever click on button increments counter, page will rerender, because state is changed. This will call useEffect.
 
-In example shown in image *02.useEffect dependencies specified.png*, there are no dependencies, so ckick on button will not cause calling of useEffect.
+In example shown in image *02.useEffect dependencies specified.png*, there are no dependencies, so click on button will not cause calling of useEffect.
