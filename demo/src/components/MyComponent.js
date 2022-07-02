@@ -1,5 +1,6 @@
 
-import {useReducer} from 'react';
+import {useEffect, useLayoutEffect, useState} from 'react';
+import axios from 'axios';
 
 
 const reducer = (state, action) => {
@@ -17,20 +18,31 @@ const reducer = (state, action) => {
 
 const MyComponent = () => {
 
-    const [state, dispatch] = useReducer(reducer, {count: 0, visible: false});
+    const [count, setCount] = useState(0);
+    const [email, setEmail] = useState('');
+    
+    useLayoutEffect(() => {
+        setEmail('?');
+    }, []);
 
-    const handleIncrement = () => { dispatch({type: 'INCREMENT'}) };
-    const handleDecrement = () => { dispatch({type: 'DECREMENT'}) };
-    const handleChangeVisibility = () => { dispatch({type: 'TOGGLE_VISIBILITY'}) }
+    useEffect(() => {
+        axios.get('https://jsonplaceholder.typicode.com/comments')
+            .then(response => {
+                setEmail(response.data[0].email);
+                console.log('API WAS CALLED');
+            });
+    }, []);
+
+    const handleIncrement = () => { setCount(count - 1) };
+    const handleDecrement = () => { setCount(count + 1)};
+    
 
     return <div>
         <h1>MyComponent</h1>
-        <p>Count is {state.count}</p>
+        <p>Count is {count}</p>
         <button onClick={handleIncrement}>Increment</button>
         <button onClick={handleDecrement}>Decrement</button>
-        <br /><br />
-        <button onClick={handleChangeVisibility}>Change visibility</button>
-        {state.visible && <p>This is a text</p>}
+        <p>Email is {email}</p>
     </div>
 };
 
