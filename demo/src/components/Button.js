@@ -1,21 +1,16 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { useEffect } from "react";
 
+const Button = ({f}) => {
 
-const Button = forwardRef((props, ref) => {
-
-    const [visible, setVisible] = useState(false);
-
-    useImperativeHandle(ref, () => ({
-        toggleVisibility(){
-            setVisible(!visible);
-        }
-    }));
+    useEffect(() => {
+        console.log('Function was rerendered!');
+    }, [f]);
 
     return <div>
         <button>Toggle visibility</button>
-        { visible && <p>This is a text</p> }
+        
     </div>
 
-});
+};
 
 export default Button;
