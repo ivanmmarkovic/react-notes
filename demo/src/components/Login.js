@@ -4,18 +4,20 @@ import MyContext from "../context/MyContext";
 
 const Login = () => {
 
-    const {setIsLogged, setUsername} = useContext(MyContext);
-    const iRef = useRef(null);
+    const {setUsername, setLogged} = useContext(MyContext);
+    const i = useRef(null);
 
     const handleClick = () => {
-        setIsLogged(true);
-        setUsername(iRef.current.value);
-    }
+        setUsername(i.current.value);
+        setLogged(true);
+    };
 
     return <div>
-        <input type="text" ref={iRef} />
+
+        <input type="text" ref={i} />
         <button onClick={handleClick}>Login</button>
     </div>
+
 };
 
 export default Login;

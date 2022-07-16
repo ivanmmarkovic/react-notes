@@ -1,20 +1,21 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import MyContext from "../context/MyContext";
-import DisplayName from "./DisplayName";
 import Login from "./Login";
-
+import Profile from "./Profile";
 
 const MyComponent = () => {
 
-    const [isLogged, setIsLogged] = useState(false);
     const [username, setUsername] = useState('');
+    const [logged, setLogged] = useState(false);
 
     return (
-        <MyContext.Provider value={{username, setIsLogged, setUsername}}>
-            <Login />
-            <DisplayName />
+        <MyContext.Provider value={{username, setUsername, logged, setLogged}}>
+            { !logged && <Login /> }
+            { logged && <Profile /> }
         </MyContext.Provider>
+        
     )
+
 };
 
 export default MyComponent;
