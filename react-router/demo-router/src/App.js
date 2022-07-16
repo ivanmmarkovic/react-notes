@@ -1,50 +1,40 @@
-
-import { useState } from 'react';
-import {BrowserRouter, Link, Routes, Route, Navigate} from 'react-router-dom';
-import About from './pages/About';
-import Home from './pages/Home';
-import Private from './pages/Private';
-
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link, Navigate} from "react-router-dom";
+import About from "./pages/About";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 
 function App() {
 
-
-  const [logged, setLogged] = useState(false);
-
-  const handleClick = () => {
-    setLogged(!logged);
-  };
+  const [logged, setLogged] = useState(false); 
 
   return (
-    <BrowserRouter>
+
+    <Router>
+
       <nav>
-        <Link to="">Home</Link>
+        <Link to="/">Home</Link>
         <Link to="/about">About</Link>
-        <Link to="/private">Private</Link>
         <Link to="/test">Test</Link>
         <Link to="/redirect">Redirect</Link>
-        <Link to="/check">Check status</Link>
+        <Link to="/private">Private</Link>
       </nav>
-      <h1 style={{"color": "crimson"}}>React router app</h1>
-      <button onClick={handleClick}>Change status</button>
+
+      <button onClick={() => setLogged(!logged)}>Login</button>
 
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path={"/"} element={<Home />} />
         <Route path="/about/*" element={<About />} />
 
-        <Route path="/test" element={(
-          <div>
-            <h1>Test element</h1>
-            <p>This is some text</p>
-          </div>
-        )} />
+        <Route path="/test" element={ <p>This is a text</p> } />
 
-        <Route path="/redirect" element={ <Navigate to={"/about"} /> } />
-        <Route path="/private" element={ logged ? <Private /> : <p>Click on button to change status</p>} />
-        <Route path="/check" element={logged ? <Navigate to={"/private"} /> : <p>Click on button to change status</p>} />
+        <Route path="/redirect" element={<Navigate to="/about" />} />
 
+        <Route path="/private" element={logged ? <Profile /> : <p>Click to login</p>} />
       </Routes>
-    </BrowserRouter>
+
+    </Router>
+  
   );
 }
 
